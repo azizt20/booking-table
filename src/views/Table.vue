@@ -1,29 +1,53 @@
 <template>
   <div class="Table">
-    <h2 v-for="i in getOrders" :key="id">
-      {{ i.id }}
-    </h2>
-    <h1 v-for="i in getRoomtypes" :key="id" >
-      {{i.id}}
+    <div v-for="ii in getOrders" :key="ii.id">
+      {{ ii }}
+      <br>
+      <hr>
+    </div>
 
-    </h1>
+    <b-alert show>Default Alert</b-alert>
+
+    <div v-for="i in getRoomtypes" :key="i.id" >
+      {{i}}
+      <br>
+      <hr>
+    </div>
+    <b-alert show>Default Alert</b-alert>
+
+<!--    <div v-for="i in addDays()" :key="i" >-->
+<!--      {{i}}-->
+<!--      <br>-->
+<!--      <hr>-->
+<!--    </div>-->
+
+
+
   </div>
 </template>
 
 <script>
 
 import {mapGetters} from "vuex"
+import {addDays} from "../components/date"
 
+// let addDays;
 export default {
   name: 'Table',
-  computed: mapGetters(["getOrders", "getRoomtypes"]),
-  // mapGetters(["getRoomtypes"]),
+  data(){
+    return{
+      datesCollections:[]
+    }
+  },
+  computed: mapGetters(["getOrders","getRoomtypes"]),
   async mounted() {
     this.$store.dispatch('fetchOrders'),
     this.$store.dispatch('fetchRoomTypes')
   },
   components: {
-
+  },
+  methods: {
+    addDays
   }
 }
 
